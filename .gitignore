@@ -1,0 +1,20 @@
+# Ignora tutti i file nella directory logs
+logs/*
+
+# Ma non ignorare la directory logs stessa
+!logs/
+!logs/.gitkeep
+
+# Ignora i file compilati di Python
+__pycache__/
+*.py[cod]
+
+# Ignora file di log specifici
+*.log
+
+# Ignora i file di sistema
+.DS_Store
+
+
+# Ignora l'ambiente virtuale
+venv/

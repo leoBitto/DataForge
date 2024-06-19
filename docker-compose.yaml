@@ -9,7 +9,6 @@ services:
       - POSTGRES_PASSWORD=airflow
 
 
-
   init-airflow:
     image: apache/airflow:latest
     depends_on:
@@ -22,7 +21,7 @@ services:
       bash -c "airflow db init &&
                 airflow users create --username airflow --password password --firstname admin --lastname admin --role Admin --email admin@example.com"
 
-  
+
   webserver:
     build:  
       context: .
@@ -53,6 +52,7 @@ services:
     ports:
       - "8080:8080"
     command: webserver
+
 
   scheduler:
     build:  

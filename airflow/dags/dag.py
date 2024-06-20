@@ -7,7 +7,7 @@ from scripts import scripts1
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2024, 6, 19),
+    'start_date': datetime(2024, 6, 20),
     'retries': 1,
 }
 

@@ -1,7 +1,6 @@
+apache-airflow==2.5.1
 psycopg2-binary
+pendulum==2.1.2
 setuptools
 wheel
-pandas
-numpy
-pyspark
 

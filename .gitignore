@@ -1,6 +1,6 @@
 # Ignora tutti i file nella directory logs
 logs/*
-
+.env
 # Ma non ignorare la directory logs stessa
 !logs/
 !logs/.gitkeep

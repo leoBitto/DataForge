@@ -3,10 +3,8 @@ services:
     image: postgres:latest
     networks:
       - pipe_network
-    environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_DB=airflow
-      - POSTGRES_PASSWORD=airflow
+    env_file:
+      - ./config/.env
 
 
   init-airflow:
@@ -16,11 +14,12 @@ services:
     networks:
       - pipe_network
     environment:
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
     command: >
       bash -c "airflow db init &&
-                airflow users create --username airflow --password password --firstname admin --lastname admin --role Admin --email admin@example.com"
-
+                airflow users create --username ${AIRFLOW_USERNAME} --password ${AIRFLOW_PASSWORD} --firstname ${AIRFLOW_FIRSTNAME} --lastname ${AIRFLOW_LASTNAME} --role ${AIRFLOW_ROLE} --email ${AIRFLOW_EMAIL}"
+    env_file:
+      - ./config/.env
 
   webserver:
     build:  
@@ -41,14 +40,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - LOAD_X = n
-      - EXECUTOR=Local
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=3QXftpNTHEXF7slBYWaj7dtNuTBRK3SJQVyNsR0FN0s=
-      - AIRFLOW__WEBSERVER__DEFAULT__USER_USERNAME=airflow
-      - AIRFLOW__WEBSERVER__DEFAULT__USER_PASSWORD=password
-      - AIRFLOW_WWW_USER_USERNAME=airflow
-      - AIRFLOW_WWW_USER_PASSWORD=PASSWORD
-      - AIRFLOW__WEBSERVER__SECRET_KEY=secret
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
+      - AIRFLOW_WWW_USER_USERNAME=${AIRFLOW_USERNAME}
+      - AIRFLOW_WWW_USER_PASSWORD=${AIRFLOW_PASSWORD}
+    env_file:
+      - ./config/.env
+      - ./config/airflow.cfg
     ports:
       - "8080:8080"
     command: webserver
@@ -73,14 +70,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - LOAD_X = n
-      - EXECUTOR=Local
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://airflow:airflow@postgres/airflow
-      - AIRFLOW__CORE__FERNET_KEY=3QXftpNTHEXF7slBYWaj7dtNuTBRK3SJQVyNsR0FN0s=
-      - AIRFLOW__WEBSERVER__DEFAULT__USER_USERNAME=airflow
-      - AIRFLOW__WEBSERVER__DEFAULT__USER_PASSWORD=password
-      - AIRFLOW_WWW_USER_USERNAME=airflow
-      - AIRFLOW_WWW_USER_PASSWORD=PASSWORD
-      - AIRFLOW__WEBSERVER__SECRET_KEY=secret
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgres+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
+      - AIRFLOW_WWW_USER_USERNAME=${AIRFLOW_USERNAME}
+      - AIRFLOW_WWW_USER_PASSWORD=${AIRFLOW_PASSWORD}
+    env_file:
+      - ./config/.env
+      - ./config/airflow.cfg
     command: scheduler
 
 

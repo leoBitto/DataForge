@@ -60,7 +60,7 @@ Make sure you have the following tools installed on your system:
 
     ```sh
     cd <dir name>
-    docker-compose up initi-airflow --build
+    docker-compose up init-airflow --build
     docker-compose up --build
     ```
 

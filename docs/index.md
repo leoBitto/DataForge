@@ -1,64 +1,83 @@
-# DjangoForge Documentation
+# DataForge Documentation
 
-Welcome to the official documentation for **DjangoForge**, a modular Django ecosystem designed for small and medium-sized enterprises (SMEs). This documentation will guide you through the installation, configuration, usage, and development of DjangoForge.
-
+Welcome to the official documentation for **DataForge**, an easy-to-use data management and processing platform for small and medium-sized enterprises (SMEs). This documentation will guide you through the installation, configuration, usage, and development of DataForge.
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-   - [Installation]({{ site.baseurl }}/installation/)
-   - [Deploy the Application]({{ site.baseurl }}/deployment/)
+   - [Installation](docs/installation.md)
+   - [Deploy the Application](docs/deployment.md)
 3. [Project Structure](#project-structure)
 4. [Usage](#usage)
-   - [Base Project]({{ site.baseurl }}/base/)
-   - [Tier 1 Applications]({{ site.baseurl }}/tier1/)
-   - [Tier 2 Applications]({{ site.baseurl }}/tier2/)
-6. [Contributing]({{ site.baseurl }}/CONTRIBUTING/)
-7. [Code of Conduct]({{ site.baseurl }}/CODE_OF_CONDUCT/)
-8. [License]({{ site.baseurl }}/LICENSE/)
-
+   - [Base Project](docs/base.md)
+   - [Silver and Gold Databases](docs/databases.md)
+   - [Airflow Workflows](docs/airflow.md)
+   - [Kubernetes & Helm](docs/kubernetes.md)
+   - [Grafana & Prometheus](docs/monitoring.md)
+5. [Contributing](docs/CONTRIBUTING.md)
+6. [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+7. [License](docs/LICENSE.md)
 
 ## Introduction
 
-DjangoForge is a comprehensive and customizable platform built on Django, aimed at delivering robust business solutions for SMEs. The ecosystem is structured into three main tiers:
+**DataForge** is a data management platform designed to simplify the collection, storage, and processing of data for SMEs. It integrates Django, databases, and automated workflows to streamline the flow of information across systems.
 
-- **Base Project**: Core functionalities and common apps needed by the entire ecosystem.
-- **Tier 1**: General business applications like CRM, ERP, and more, built on top of the Base Project.
-- **Tier 2**: Industry-specific applications that extend Tier 1 apps with tailored functionalities for particular business needs.
+DataForge uses a modular architecture with three main components:
 
-This documentation is intended to help developers, administrators, and users to effectively use and contribute to DjangoForge.
+- **Base Project**: Core functionalities and modules for managing data and processing workflows.
+- **Silver Database**: Structured data storage, ideal for preliminary analysis and integration.
+- **Gold Database**: Refined and processed data for advanced analysis and machine learning.
+
+Additionally, DataForge leverages Kubernetes for scalable deployment, Helm for easier management of Kubernetes charts, and Grafana with Prometheus for monitoring your application and infrastructure.
 
 ## Getting Started
 
-If you're new to DjangoForge, start by [installing]({{ site.baseurl }}/installation.md) the application and configuring your development environment.
+Start by installing the necessary dependencies and setting up the environment by following the [installation guide](docs/installation.md).
+
+Once set up, deploy the application using the instructions in the [deployment guide](docs/deployment.md).
+
+For local development, we recommend using **Docker** and **Kubernetes** to manage your application in a containerized environment. Follow the [Kubernetes setup](docs/kubernetes.md) to learn more.
 
 ## Project Structure
 
-DjangoForge is organized to be modular and scalable. Learn more about how the project is structured in the following section.
+DataForge is organized in a modular way to provide flexibility and scalability. The project includes components for both backend functionality and data processing workflows. Learn more about how the project is structured in the following section.
 
 ## Usage
 
-DjangoForge includes a variety of applications to meet different business needs. Explore the functionality of the:
+DataForge provides a set of features to manage your data flows and infrastructure:
 
-- **[Base Project]({{ site.baseurl }}/base/)**: Core modules and features.
-- **[Tier 1 Applications]({{ site.baseurl }}/tier1/)**: General business apps like CRM, ERP, and more.
-- **[Tier 2 Applications]({{ site.baseurl }}/tier2/)**: Industry-specific extensions for vertical markets.
+- **[Base Project](docs/base.md)**: Core tools for managing data collection and storage.
+- **[Silver and Gold Databases](docs/databases.md)**: Databases for structured and processed data.
+- **[Airflow Workflows](docs/airflow.md)**: Automate data transformation and integration tasks.
 
+### Kubernetes & Helm
+
+DataForge is designed to be deployed on Kubernetes, which provides scalable and efficient container orchestration. The application is packaged into **Helm charts**, making it easy to manage and deploy the entire stack on Kubernetes.
+
+In this section, you will find the necessary steps to deploy DataForge on Kubernetes, manage Helm releases, and scale the infrastructure.
+
+- **[Kubernetes Setup](docs/kubernetes.md)**: Instructions for setting up and configuring Kubernetes for local or cloud-based deployment.
+- **[Helm Chart](docs/helm.md)**: Guide on how to use Helm to install and manage DataForge's components.
+
+### Grafana & Prometheus
+
+Monitoring the performance of your Kubernetes cluster and application is essential. **Prometheus** is used to collect metrics, and **Grafana** is used to visualize them in beautiful and informative dashboards.
+
+Follow the instructions to integrate Grafana and Prometheus into your Kubernetes setup to monitor both infrastructure and application metrics.
+
+- **[Prometheus Setup](docs/prometheus.md)**: Learn how to set up Prometheus to collect metrics from your DataForge application.
+- **[Grafana Setup](docs/grafana.md)**: Instructions for setting up Grafana to visualize and analyze the collected metrics.
 
 ## Contributing
 
-We welcome contributions from the community! If you want to contribute to DjangoForge, please read the [Contributing Guidelines]({{ site.baseurl }}/CONTRIBUTING.md) to get started.
+We welcome contributions! Please refer to the [Contributing Guidelines](docs/CONTRIBUTING.md) for more information on how to get started.
 
 ## Code of Conduct
 
-Please note that we have a [Code of Conduct]({{ site.baseurl }}/CODE_OF_CONDUCT.md) in place to ensure a welcoming environment for everyone. Please read it before contributing.
+We strive for a welcoming and inclusive community. Please read our [Code of Conduct](docs/CODE_OF_CONDUCT.md) before contributing.
 
 ## License
 
-DjangoForge is released under the [GPL License]({{ site.baseurl }}/LICENSE.md). Please refer to the license file for details on how you can use and distribute DjangoForge.
+DataForge is licensed under the [GPL License](docs/LICENSE.md). See the license file for details on how you can use and distribute the software.
 
-
----
-
-Thank you for using DjangoForge! If you encounter any issues or have suggestions, feel free to open an issue on GitHub.

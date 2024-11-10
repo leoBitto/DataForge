@@ -15,9 +15,9 @@ Welcome to the official documentation for **DataForge**, an easy-to-use data man
    - [Airflow Workflows](docs/airflow.md)
    - [Kubernetes & Helm](docs/kubernetes.md)
    - [Grafana & Prometheus](docs/monitoring.md)
-5. [Contributing](docs/CONTRIBUTING.md)
-6. [Code of Conduct](docs/CODE_OF_CONDUCT.md)
-7. [License](docs/LICENSE.md)
+5. [Contributing](../CONTRIBUTING.md)
+6. [Code of Conduct](../CODE_OF_CONDUCT.md)
+7. [License](../LICENSE.md)
 
 ## Introduction
 

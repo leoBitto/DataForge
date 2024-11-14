@@ -1,6 +1,6 @@
-# Contributing to DjangoForge
+# Contributing to DataForge
 
-Thank you for your interest in contributing to DjangoForge! Please follow these guidelines to ensure that your contribution can be integrated into the project.
+Thank you for your interest in contributing to DataForge! Please follow these guidelines to ensure that your contribution can be integrated into the project.
 
 ## How to Contribute
 

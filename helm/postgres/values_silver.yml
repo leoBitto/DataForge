@@ -1,0 +1,26 @@
+namespace: dataforge-test
+
+replicas: 1
+
+image:
+  repository: postgres
+  tag: 14.5
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+config:
+  POSTGRES_DB: silverdb
+
+secret:
+  POSTGRES_USER: "silveruser"  # Specifico per Silver
+  POSTGRES_PASSWORD: "silversafe"

@@ -1,0 +1,47 @@
+replicas: 1
+
+namespace: dataforge-test
+
+image:
+  repository: your-django-image
+  tag: latest
+
+resources:
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+  requests:
+    cpu: "250m"
+    memory: "128Mi"
+
+env:
+  DJANGO_SETTINGS_MODULE: "base.settings"
+  DEBUG: "1"
+  DJANGO_ALLOWED_HOSTS: "localhost django.local"
+
+persistence:
+  media:
+    enabled: true
+    size: 1Gi
+  static:
+    enabled: true
+    size: 1Gi
+
+secret:
+  SECRET_KEY: "super-secret-key"
+  DATABASE_PASSWORD: "super-secure-password"
+
+db:
+  silver:
+    host: "postgres-silver"
+    port: "5432"
+    name: "silverdb"
+    user: "silveruser"
+    password: "silversafe"  # Può essere spostata in Secret
+  gold:
+    host: "postgres-gold"
+    port: "5432"
+    name: "golddb"
+    user: "golduser"
+    password: "goldsafe"  # Può essere spostata in Secret
+

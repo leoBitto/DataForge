@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-{{ .Values.config.POSTGRES_DB }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  selector:
+    app: postgres-{{ .Values.config.POSTGRES_DB }}
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

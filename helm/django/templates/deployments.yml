@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: django
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+  containers:
+  - name: django
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+    env:
+    - name: SILVER_DB_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: django-config
+          key: SILVER_DB_HOST
+    - name: SILVER_DB_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: django-config
+          key: SILVER_DB_PORT
+    - name: SILVER_DB_USER
+      valueFrom:
+        secretKeyRef:
+          name: django-secret
+          key: SILVER_DB_USER
+    - name: SILVER_DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: django-secret
+          key: SILVER_DB_PASSWORD
+    - name: GOLD_DB_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: django-config
+          key: GOLD_DB_HOST
+    - name: GOLD_DB_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: django-config
+          key: GOLD_DB_PORT
+    - name: GOLD_DB_USER
+      valueFrom:
+        secretKeyRef:
+          name: django-secret
+          key: GOLD_DB_USER
+    - name: GOLD_DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: django-secret
+          key: GOLD_DB_PASSWORD
+
+  volumeMounts:
+      - name: media-volume
+        mountPath: /app/media
+      - name: static-volume
+        mountPath: /app/static
+    volumes:
+    - name: media-volume
+      persistentVolumeClaim:
+        claimName: django-media-pvc
+    - name: static-volume
+      persistentVolumeClaim:
+        claimName: django-static-pvc

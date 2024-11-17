@@ -4,10 +4,13 @@ metadata:
   name: django-config
   namespace: {{ .Values.namespace }}
 data:
-  DJANGO_SETTINGS_MODULE: "{{ .Values.env.DJANGO_SETTINGS_MODULE }}"
-  DEBUG: "{{ .Values.env.DEBUG }}"
-  DJANGO_ALLOWED_HOSTS: "{{ .Values.env.DJANGO_ALLOWED_HOSTS }}"
-  SILVER_DB_HOST: "{{ .Values.db.silver.host }}"
-  SILVER_DB_PORT: "{{ .Values.db.silver.port }}"
-  GOLD_DB_HOST: "{{ .Values.db.gold.host }}"
-  GOLD_DB_PORT: "{{ .Values.db.gold.port }}"
+  debug: "{{ .Values.env.DEBUG }}"
+  django_allowed_hosts: "{{ .Values.env.DJANGO_ALLOWED_HOSTS }}"
+  silver_db_host: "{{ .Values.db.silver.host }}"
+  silver_db_port: "{{ .Values.db.silver.port }}"
+  silver_db_name: "{{ .Values.db.silver.name }}"
+  silver_sql_engine: "{{ .Values.db.silver.engine }}"
+  gold_db_host: "{{ .Values.db.gold.host }}"
+  gold_db_port: "{{ .Values.db.gold.port }}"
+  gold_db_name: "{{ .Values.db.gold.name }}"
+  gold_sql_engine: "{{ .Values.db.gold.engine }}"

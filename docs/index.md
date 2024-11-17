@@ -6,18 +6,18 @@ Welcome to the official documentation for **DataForge**, an easy-to-use data man
 
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
-   - [Installation](docs/installation.md)
-   - [Deploy the Application](docs/deployment.md)
+   - [Installation](/installation.md)
+   - [Deploy the Application](/deployment.md)
 3. [Project Structure](#project-structure)
 4. [Usage](#usage)
-   - [Base Project](docs/base.md)
-   - [Silver and Gold Databases](docs/databases.md)
-   - [Airflow Workflows](docs/airflow.md)
-   - [Kubernetes & Helm](docs/kubernetes.md)
-   - [Grafana & Prometheus](docs/monitoring.md)
-5. [Contributing](../CONTRIBUTING.md)
-6. [Code of Conduct](../CODE_OF_CONDUCT.md)
-7. [License](../LICENSE.md)
+   - [Base Project](/base.md)
+   - [Silver and Gold Databases](/databases.md)
+   - [Airflow Workflows](/airflow.md)
+   - [Kubernetes & Helm](/kubernetes.md)
+   - [Grafana & Prometheus](/monitoring.md)
+5. [Contributing](./CONTRIBUTING.md)
+6. [Code of Conduct](./CODE_OF_CONDUCT.md)
+7. [License](./LICENSE.md)
 
 ## Introduction
 

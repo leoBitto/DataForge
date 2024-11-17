@@ -3,7 +3,7 @@ replicas: 1
 namespace: dataforge-test
 
 image:
-  repository: your-django-image
+  repository: django-dev
   tag: latest
 
 resources:
@@ -15,33 +15,41 @@ resources:
     memory: "128Mi"
 
 env:
-  DJANGO_SETTINGS_MODULE: "base.settings"
   DEBUG: "1"
-  DJANGO_ALLOWED_HOSTS: "localhost django.local"
+  DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1"
 
 persistence:
   media:
     enabled: true
-    size: 1Gi
+    size: 5Gi
+    name: django-media-pvc
+    storageClassName: "microk8s-hostpath"
+    accessModes:
+      - ReadWriteOnce
   static:
     enabled: true
-    size: 1Gi
+    size: 5Gi
+    name: django-static-pvc
+    storageClassName: "microk8s-hostpath"
+    accessModes:
+      - ReadWriteOnce
 
 secret:
   SECRET_KEY: "super-secret-key"
-  DATABASE_PASSWORD: "super-secure-password"
+  SILVER_DB_USER: "silveruser"
+  SILVER_DB_PASSWORD: "silversafe"
+  GOLD_DB_USER: "golduser"
+  GOLD_DB_PASSWORD: "goldsafe"
 
 db:
   silver:
     host: "postgres-silver"
     port: "5432"
     name: "silverdb"
-    user: "silveruser"
-    password: "silversafe"  # Può essere spostata in Secret
+    engine: "django.db.backends.postgresql"
   gold:
     host: "postgres-gold"
     port: "5432"
     name: "golddb"
-    user: "golduser"
-    password: "goldsafe"  # Può essere spostata in Secret
+    engine: "django.db.backends.postgresql"
 

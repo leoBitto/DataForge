@@ -15,60 +15,99 @@ spec:
       labels:
         app: django
     spec:
-  containers:
-  - name: django
-    image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-    env:
-    - name: SILVER_DB_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: django-config
-          key: SILVER_DB_HOST
-    - name: SILVER_DB_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: django-config
-          key: SILVER_DB_PORT
-    - name: SILVER_DB_USER
-      valueFrom:
-        secretKeyRef:
-          name: django-secret
-          key: SILVER_DB_USER
-    - name: SILVER_DB_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: django-secret
-          key: SILVER_DB_PASSWORD
-    - name: GOLD_DB_HOST
-      valueFrom:
-        configMapKeyRef:
-          name: django-config
-          key: GOLD_DB_HOST
-    - name: GOLD_DB_PORT
-      valueFrom:
-        configMapKeyRef:
-          name: django-config
-          key: GOLD_DB_PORT
-    - name: GOLD_DB_USER
-      valueFrom:
-        secretKeyRef:
-          name: django-secret
-          key: GOLD_DB_USER
-    - name: GOLD_DB_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: django-secret
-          key: GOLD_DB_PASSWORD
-
-  volumeMounts:
-      - name: media-volume
-        mountPath: /app/media
-      - name: static-volume
-        mountPath: /app/static
-    volumes:
-    - name: media-volume
-      persistentVolumeClaim:
-        claimName: django-media-pvc
-    - name: static-volume
-      persistentVolumeClaim:
-        claimName: django-static-pvc
+      containers:
+      - name: django
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        env:
+        # Django settings
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: debug
+        - name: DJANGO_ALLOWED_HOSTS
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: django_allowed_hosts
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: SECRET_KEY
+        # Silver DB settings
+        - name: SILVER_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: silver_db_host
+        - name: SILVER_DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: silver_db_port
+        - name: SILVER_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: silver_db_name
+        - name: SILVER_SQL_ENGINE
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: silver_sql_engine
+        - name: SILVER_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: SILVER_DB_USER
+        - name: SILVER_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: SILVER_DB_PASSWORD
+        # Gold DB settings
+        - name: GOLD_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: gold_db_host
+        - name: GOLD_DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: gold_db_port
+        - name: GOLD_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: gold_db_name
+        - name: GOLD_SQL_ENGINE
+          valueFrom:
+            configMapKeyRef:
+              name: django-config
+              key: gold_sql_engine
+        - name: GOLD_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: GOLD_DB_USER
+        - name: GOLD_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: GOLD_DB_PASSWORD
+        volumeMounts:
+        - name: media-volume
+          mountPath: /app/media
+        - name: static-volume
+          mountPath: /app/static
+      volumes:
+        - name: media-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.media.name | default "django-media-pvc" }}
+        - name: static-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.static.name | default "django-static-pvc" }}

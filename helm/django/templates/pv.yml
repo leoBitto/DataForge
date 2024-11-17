@@ -1,0 +1,30 @@
+# pv.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: django-media-pv
+  namespace: dataforge-test
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: microk8s-hostpath
+  hostPath:
+    path: /data/django/media
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: django-static-pv
+  namespace: dataforge-test
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: microk8s-hostpath
+  hostPath:
+    path: /data/django/static
